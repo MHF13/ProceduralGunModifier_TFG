@@ -32,7 +32,7 @@ public class GunModifier : MonoBehaviour
     public bool RandomGunColor =false;
     public bool RandomGun =false;
 
-
+    public int count = 0;
     private void Awake()
     {
         // Form
@@ -62,7 +62,7 @@ public class GunModifier : MonoBehaviour
         {
             color[i] = materials[i].color;
         }
-
+        count = numMat;
     }
 
     // Update is called once per frame
@@ -152,7 +152,7 @@ public class GunModifier : MonoBehaviour
     }
     private void CreateNewColors()
     {
-        for (int i = 0; i < numBS; i++)
+        for (int i = 0; i < numMat; i++)
         {
             color[i] = Random.ColorHSV();
         }

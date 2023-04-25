@@ -123,84 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!21 &486968207
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Body (Instance)
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0
-    - _GlossyReflections: 1
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +217,192 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!21 &777259970
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Default-Material (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance)
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ValidKeywords:
+  - _EMISSION
+  m_InvalidKeywords: []
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Detail:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Occlusion:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaTestRef: 0.5
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _EmissionScaleUI: 1
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Lightmapping: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 0.47052994, g: 0.41770193, b: 0.5018417, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0.99999994}
+    - _EmissionColorUI: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColorWithMapUI: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
+--- !u!21 &836407587
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Default-Material (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance)
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ValidKeywords:
+  - _EMISSION
+  m_InvalidKeywords: []
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Detail:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Occlusion:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaTestRef: 0.5
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _EmissionScaleUI: 1
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Lightmapping: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 0.0061384887, g: 0.02743544, b: 0.04050613, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0.99999994}
+    - _EmissionColorUI: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColorWithMapUI: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,163 +479,54 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.1315268, y: 0.29694906, z: -0.041334536, w: 0.9448881}
-  m_LocalPosition: {x: 6.4307, y: 0.29594645, z: -1.130493}
+  m_LocalRotation: {x: 0.24877915, y: 0.26046512, z: -0.06965463, w: 0.93027693}
+  m_LocalPosition: {x: 5.7962813, y: 0.9830704, z: -2.169918}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1066512911
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 7.828699
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.32460976
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -3887185075125053422, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_DirtyAABB
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -3887185075125053422, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_AABB.m_Center.x
-      value: -0.58271354
-      objectReference: {fileID: 0}
-    - target: {fileID: -3887185075125053422, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_AABB.m_Center.y
-      value: -0.000026922673
-      objectReference: {fileID: 0}
-    - target: {fileID: -3887185075125053422, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_AABB.m_Center.z
-      value: 0.02307631
-      objectReference: {fileID: 0}
-    - target: {fileID: -3887185075125053422, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_AABB.m_Extent.x
-      value: 0.74912304
-      objectReference: {fileID: 0}
-    - target: {fileID: -3887185075125053422, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_AABB.m_Extent.y
-      value: 0.0789808
-      objectReference: {fileID: 0}
-    - target: {fileID: -3887185075125053422, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_AABB.m_Extent.z
-      value: 0.32374316
-      objectReference: {fileID: 0}
-    - target: {fileID: -3887185075125053422, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_UpdateWhenOffscreen
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -3887185075125053422, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_SkinnedMotionVectors
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -3887185075125053422, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 1601645631}
-    - target: {fileID: -3887185075125053422, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 486968207}
-    - target: {fileID: -3887185075125053422, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_BlendShapeWeights.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -3887185075125053422, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_BlendShapeWeights.Array.data[0]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -3887185075125053422, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_BlendShapeWeights.Array.data[1]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-      propertyPath: m_Name
-      value: MG_02
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
---- !u!1 &1066512912 stripped
+--- !u!1 &1446957329 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fec5515a48710ad4bb39cfdb4daa197b, type: 3}
-  m_PrefabInstance: {fileID: 1066512911}
+  m_CorrespondingSourceObject: {fileID: 998463268600359126, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+  m_PrefabInstance: {fileID: 1798914543}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1066512913
+--- !u!114 &1446957333
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1066512912}
+  m_GameObject: {fileID: 1446957329}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffedb431803d59448b7831f0dc093909, type: 3}
+  m_Script: {fileID: 11500000, guid: 004de1e96ae8daf42beb3d869e6385d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weightBS: 0000000000000000
+  weightBS: 2e0000005300000043000000
   color:
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.14845146, g: 0.111572936, b: 0.11680714, a: 1}
+  - {r: 0.0061384887, g: 0.02743544, b: 0.04050613, a: 1}
+  - {r: 0.954159, g: 0.78786886, b: 0.53646976, a: 1}
+  - {r: 0.47052994, g: 0.41770193, b: 0.5018417, a: 1}
   RandomGunForm: 0
   RandomGunColor: 0
   RandomGun: 0
---- !u!21 &1601645631
+--- !u!21 &1593638428
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Base (Instance)
+  m_Name: Default-Material (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance)
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _EMISSION
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -537,6 +536,10 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Detail:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -564,6 +567,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Occlusion:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -574,13 +581,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaTestRef: 0.5
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EmissionScaleUI: 1
     - _GlossMapScale: 1
-    - _Glossiness: 0
+    - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _Lightmapping: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -591,6 +601,263 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 0.954159, g: 0.78786886, b: 0.53646976, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0.99999994}
+    - _EmissionColorUI: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColorWithMapUI: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
+--- !u!21 &1761380936
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Default-Material (Instance) (Instance) (Instance) (Instance) (Instance)
+    (Instance)
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ValidKeywords:
+  - _EMISSION
+  m_InvalidKeywords: []
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Detail:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Occlusion:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaTestRef: 0.5
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _EmissionScaleUI: 1
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Lightmapping: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 0.14845146, g: 0.111572936, b: 0.11680714, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0.99999994}
+    - _EmissionColorUI: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColorWithMapUI: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
+--- !u!1001 &1798914543
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 998463268600359126, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: m_Name
+      value: MG_03 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: count
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: RandomGun
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: RandomGunForm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: RandomGunColor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: color.Array.data[0].b
+      value: 0.107375875
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: color.Array.data[0].g
+      value: 0.11111392
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: color.Array.data[0].r
+      value: 0.0394015
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: color.Array.data[1].b
+      value: 0.5413733
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: color.Array.data[1].g
+      value: 0.7676052
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: color.Array.data[1].r
+      value: 0.35387352
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: color.Array.data[2].b
+      value: 0.23925103
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: color.Array.data[2].g
+      value: 0.2683803
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: color.Array.data[2].r
+      value: 0.21599631
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: color.Array.data[3].b
+      value: 0.4683115
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: color.Array.data[3].g
+      value: 0.21843338
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: color.Array.data[3].r
+      value: 0.6139737
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: weightBS.Array.data[0]
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: weightBS.Array.data[1]
+      value: 82
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: weightBS.Array.data[2]
+      value: 52
+      objectReference: {fileID: 0}
+    - target: {fileID: 4238906548836181843, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4238906548836181843, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.867829
+      objectReference: {fileID: 0}
+    - target: {fileID: 4238906548836181843, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.343
+      objectReference: {fileID: 0}
+    - target: {fileID: 4238906548836181843, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.9547212
+      objectReference: {fileID: 0}
+    - target: {fileID: 4238906548836181843, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4238906548836181843, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4238906548836181843, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4238906548836181843, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4238906548836181843, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4238906548836181843, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4238906548836181843, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102496456170220249, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 1761380936}
+    - target: {fileID: 8102496456170220249, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 836407587}
+    - target: {fileID: 8102496456170220249, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 1593638428}
+    - target: {fileID: 8102496456170220249, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 777259970}
+    - target: {fileID: 8102496456170220249, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[0]
+      value: 46
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102496456170220249, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[1]
+      value: 83
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102496456170220249, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[2]
+      value: 67
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3562062352418282007, guid: c3a970c125272f143a62388ba95cc733, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: c3a970c125272f143a62388ba95cc733, type: 3}
