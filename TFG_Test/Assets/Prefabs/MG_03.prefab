@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4238906548836181843}
   - component: {fileID: 8102496456170220249}
-  - component: {fileID: 3562062352418282007}
   m_Layer: 0
   m_Name: MG_03
   m_TagString: Untagged
@@ -92,24 +91,3 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.21128011, y: 20.325356, z: -20.085358}
     m_Extent: {x: 4.831723, y: 45.72268, z: 28.480125}
   m_DirtyAABB: 0
---- !u!114 &3562062352418282007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 998463268600359126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffedb431803d59448b7831f0dc093909, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weightBS: 000000000000000000000000
-  color:
-  - {r: 0.43473005, g: 0.70809996, b: 0.7905092, a: 1}
-  - {r: 0.3708391, g: 0.55988246, b: 0.4464688, a: 1}
-  - {r: 0.76207817, g: 0.4744515, b: 0.17610079, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  RandomGunForm: 0
-  RandomGunColor: 0
-  RandomGun: 0

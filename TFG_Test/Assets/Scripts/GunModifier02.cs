@@ -2,19 +2,30 @@ using UnityEngine;
 using System.Collections.Generic;
 
 
-public class BlendShape{
-    public string name = "";
-    [Range(0,100)]
+[System.Serializable]
+public class BlendShape
+{
+    [HideInInspector]
+    public string name;
+    [Range(0, 100)]
     public int weightBS;
     private int weight0;
+
+    public BlendShape(string _name)
+    {
+        name = _name;
+        weightBS = 0;
+        weight0 = 0;
+    }
+
     public void setW0(int set)
     {
         weight0 = set;
     }
     public int getW0() { return weight0; }
 
-}
 
+}
 
 [ExecuteInEditMode]
 public class GunModifier02 : MonoBehaviour
@@ -28,6 +39,8 @@ public class GunModifier02 : MonoBehaviour
     [Range(0, 100)]
     public int[] weightBS;
     private int[] weight0;*/
+    [Header("blendShapes")]
+    [SerializeField]
     public BlendShape[] blendShape;
 
     private SkinnedMeshRenderer meshRenderer;
@@ -60,9 +73,8 @@ public class GunModifier02 : MonoBehaviour
 
         for (int i = 0; i < numBS; i++)
         {
-            blendShape[i].name = GunMesh.GetBlendShapeName(i);
-            blendShape[i].weightBS = 0;
-            blendShape[i].setW0(0);
+            string newName = GunMesh.GetBlendShapeName(i);
+            blendShape[i] = new BlendShape(newName);
         }
 
         // Colors
@@ -120,7 +132,7 @@ public class GunModifier02 : MonoBehaviour
 
         foreach (var item in blendShape)
         {
-            if (item.weightBS !=item.getW0())
+            if (item.weightBS != item.getW0())
             {
                 return true;
             }
@@ -131,25 +143,21 @@ public class GunModifier02 : MonoBehaviour
     private void UpdateForm()
     {
 
-        foreach (var item in blendShape)
-        {
-            meshRenderer.SetBlendShapeWeight()
-        }
-
         for (int i = 0; i < numBS; i++)
         {
-            meshRenderer.SetBlendShapeWeight(i, weightBS[i]);
-            weight0[i] = weightBS[i];
+            meshRenderer.SetBlendShapeWeight(i, blendShape[i].weightBS);
+            blendShape[i].setW0(blendShape[i].weightBS);
         }
 
 
     }
     private void CreateNewForm()
     {
-        for (int i = 0; i < numBS; i++)
+        foreach (var item in blendShape)
         {
-            weightBS[i] = Random.Range(0, 100);
+           item.weightBS = Random.Range(0, 100);
         }
+
     }
 
     // Colors
