@@ -68,12 +68,12 @@ public:
 		// Stats Finales
 		daño = daño + total[0];
 		dispersion = dispersion + total[1];
-		//if (dispersion < 0) { dispersion = 0; }
+		if (dispersion < 0) { dispersion = 0; }
 		retroceso = retroceso + total[2];
 		recarga = recarga + total[3];
 		cadencia = cadencia + total[4];
 		cargador = cargador + total[5];
-		//if (cargador < 1) { cargador = 1; }
+		if (cargador < 1) { cargador = 1; }
 		
 	};
 	~Gun() {};
@@ -93,9 +93,10 @@ public:
 	};
 
 	bool Compare(Gun other) {
-		if (daño == other.daño && 
+		if (
 			dispersion == other.dispersion &&
 			retroceso == other.retroceso &&
+			daño == other.daño && 
 			recarga == other.recarga &&
 			cadencia == other.cadencia &&
 			cargador == other.cargador)
@@ -153,11 +154,12 @@ void main() {
 	vector<Gun> gun;
 	
 	int a = 0;
-	for (int i = 0; i < 100; i++)
+	int divisior = 2;
+	for (int i = 0; i < 100; i = i + divisior)
 	{
-		for (int j = 0; j < 100; j++)
+		for (int j = 0; j < 100; j = j + divisior)
 		{
-			for (int k = 0; k < 100; k++)
+			for (int k = 0; k < 100; k = k + divisior)
 			{
 				a++;
 				Gun actGun = Gun(i, j, k);
@@ -165,17 +167,15 @@ void main() {
 			}
 		}
 	}
-
-	for (int i = 400; i < gun.size(); i++)
+	cout << a << "\n" << endl;
+	for (int i = 0; i < gun.size(); i=i+ divisior)
 	{
 		if (i%100==0)
 		{
-			cout << i << "\n" << endl;
+			cout << i/divisior << "\n" << endl;
 		}
 		Comparator(gun,i);
 	}
-
-
 
 	system("pause");
 }
