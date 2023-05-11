@@ -49,21 +49,22 @@ public class GunModifier02 : MonoBehaviour
 
     private void Awake()
     {
-        // Form
+        
         meshRenderer = GetComponent<SkinnedMeshRenderer>();
-
 
         Mesh GunMesh = meshRenderer.sharedMesh;
         numBS = GunMesh.blendShapeCount;
 
         blendShape = new BlendShape[numBS];
 
+        //
         for (int i = 0; i < numBS; i++)
         {
             string newName = GunMesh.GetBlendShapeName(i);
             blendShape[i] = new BlendShape(newName);
         }
 
+    
         // Colors
         materials = GetComponent<Renderer>().materials;
         numMat = materials.Length;
