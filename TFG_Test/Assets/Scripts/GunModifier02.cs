@@ -113,9 +113,23 @@ public class GunModifier02 : MonoBehaviour
             UpdateGun();
         }
     }
+    public void RandomForm()
+    {
+        CreateNewForm();
+        UpdateForm();
+    }
+    public void RandomCollor()
+    {
+        CreateNewColors();
+    }
+    public void RandomAll()
+    {
+        CreateNewForm();
+        CreateNewColors();
+        UpdateGun();
+    }
 
     // Form
-
     // Checks whether the values of sliders have been altered
     private bool ChangeForm()
     {
@@ -148,9 +162,8 @@ public class GunModifier02 : MonoBehaviour
         }
     }
 
+    //------------
     // Colors
-
-
     // Checks whether the colour has been altered since the inspector
     private bool ChangeColors()
     {
@@ -180,7 +193,7 @@ public class GunModifier02 : MonoBehaviour
             color[i] = Random.ColorHSV();
         }
     }
-
+    //-----------
     //All
     private void UpdateGun()
     {
