@@ -1,6 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+public enum GunType
+{
+    Pistol,
+    ShootGun
+}
+
 
 [System.Serializable]
 public class BlendShape
@@ -23,10 +29,14 @@ public class BlendShape
 
 }
 
-[ExecuteInEditMode]
 public class GunModifier02 : MonoBehaviour
 {
     private int numBS;
+
+    // Esto sera para seleccionar otro modelo
+    // Aun no haremos nada con eso
+    public GunType type;
+
     [Header("blendShapes")]
     [SerializeField]
     public BlendShape[] blendShape;
@@ -47,7 +57,12 @@ public class GunModifier02 : MonoBehaviour
     public bool RandomGunColor = false;
     public bool RandomGun = false;
 
-    private void Awake()
+    //------------------------
+    
+    
+
+    //-----------------------------------
+    private void Start()
     {
         
         meshRenderer = GetComponent<SkinnedMeshRenderer>();
@@ -58,13 +73,16 @@ public class GunModifier02 : MonoBehaviour
         blendShape = new BlendShape[numBS];
 
         //
+        int[] ret = new int[numBS];
         for (int i = 0; i < numBS; i++)
         {
             string newName = GunMesh.GetBlendShapeName(i);
             blendShape[i] = new BlendShape(newName);
+            ret[i] = blendShape[i].weightBS;
         }
+        this.GetComponent<Gun>().SetNewBS(ret);
 
-    
+
         // Colors
         materials = GetComponent<Renderer>().materials;
         numMat = materials.Length;
@@ -113,6 +131,10 @@ public class GunModifier02 : MonoBehaviour
             UpdateGun();
         }
     }
+
+
+
+    //-------------------------------------------------
     public void RandomForm()
     {
         CreateNewForm();
@@ -146,13 +168,27 @@ public class GunModifier02 : MonoBehaviour
     // Updates the value of the model's blendshapes with the ones we have saved
     private void UpdateForm()
     {
+        // old
+
+        /*
         for (int i = 0; i < numBS; i++)
         {
             meshRenderer.SetBlendShapeWeight(i, blendShape[i].weightBS);
             blendShape[i].setW0(blendShape[i].weightBS);
         }
-    }
+        */
+        // new
+        int[] ret = new int[numBS];
+        for (int i = 0; i < numBS; i++)
+        {
+            meshRenderer.SetBlendShapeWeight(i, blendShape[i].weightBS);
+            blendShape[i].setW0(blendShape[i].weightBS);
+            ret[i] = blendShape[i].weightBS;
+        }
+        this.GetComponent<Gun>().SetNewBS(ret);
 
+    }
+    
     // Assigns a random new valor for our blend shapes
     private void CreateNewForm()
     {
