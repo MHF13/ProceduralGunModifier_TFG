@@ -129,6 +129,35 @@ namespace StarterAssets
 			Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
 		}
 
+		[Space]
+		public Vector3 currentRotation;
+		public Vector3 targetRotation;
+
+		[SerializeField] private float recoilX;
+		[SerializeField] private float recoilY;
+
+		[SerializeField] private float snappiness;
+		[SerializeField] private float returnSpeed;
+		private float yRot;
+
+		//---
+		float WantedYRotation;
+		float WantedXRotation;
+
+		float CurrentXRotation;
+		float CurrentYRotation;
+
+		float mouseSensivity = 3f;
+
+		float rotationYVelocity = 1f, yRotationSpeed = 1f;
+		float rotationXVelocity = 1f, xRotationSpeed = 1f;
+
+		public void SetNewRot(float x, float y)
+        {
+			WantedYRotation -= Mathf.Abs(y);
+			WantedXRotation -= x;
+
+		}
 		private void CameraRotation()
 		{
 			// if there is an input
@@ -136,19 +165,37 @@ namespace StarterAssets
 			{
 				//Don't multiply mouse input by Time.deltaTime
 				float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
-				
-				_cinemachineTargetPitch += _input.look.y * RotationSpeed * deltaTimeMultiplier;
-				_rotationVelocity = _input.look.x * RotationSpeed * deltaTimeMultiplier;
 
-				// clamp our pitch rotation
-				_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
+				WantedYRotation += _input.look.x * mouseSensivity;
+				WantedXRotation += _input.look.y * mouseSensivity;
 
-				// Update Cinemachine camera target pitch
-				CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
+				WantedXRotation = Mathf.Clamp(WantedXRotation,BottomClamp,TopClamp);
 
-				// rotate the player left and right
-				transform.Rotate(Vector3.up * _rotationVelocity);
+				//CurrentYRotation = Mathf.SmoothDamp(CurrentYRotation, WantedYRotation, ref rotationYVelocity, yRotationSpeed);
+
+				CurrentYRotation = Mathf.Lerp(CurrentYRotation, WantedYRotation, yRotationSpeed);
+				CurrentXRotation = Mathf.Lerp(CurrentXRotation, WantedXRotation,xRotationSpeed);
+								
+				// izquierda y derecha
+				transform.rotation = Quaternion.Euler(0, CurrentYRotation, 0);
+
+				// Arriba y abajo
+				CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(CurrentXRotation, 0, 0);
+
+				//---------------------------------------------------------------------------------
+				/*yRot += (_input.look.y * deltaTimeMultiplier) * RotationSpeed;
+				yRot = ClampAngle(yRot, BottomClamp, TopClamp);
+
+				CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(yRot, 0.0f, 0.0f);
+
+				transform.Rotate(Vector3.up * (_input.look.x * deltaTimeMultiplier)); */
 			}
+		}
+
+		public void RecoilFire()
+		{
+			
+			targetRotation += new Vector3(-recoilX, Random.Range(-recoilY, recoilY), 0);
 		}
 
 		private void Move()
@@ -191,7 +238,7 @@ namespace StarterAssets
 			if (_input.move != Vector2.zero)
 			{
 				// move
-				inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
+				inputDirection = CinemachineCameraTarget.transform.right * _input.move.x + CinemachineCameraTarget.transform.forward * _input.move.y;
 			}
 
 			// move the player

@@ -7,9 +7,9 @@ using StarterAssets;
 
 public class Gun : MonoBehaviour
 {
-
     private StarterAssetsInputs _inputs;
     private GunModifier02 GM;
+    private FirstPersonController fpc;
     private bool canShoot;
 
     public GunType type;
@@ -34,13 +34,15 @@ public class Gun : MonoBehaviour
     [Space]
     public bool auto;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
         _inputs = transform.parent.parent.GetComponent<StarterAssetsInputs>();
         GM = this.GetComponent<GunModifier02>();
         canShoot = true;
-
+        fpc = transform.parent.parent.GetComponent<FirstPersonController>();
     }
 
     // Update is called once per frame
@@ -113,12 +115,30 @@ public class Gun : MonoBehaviour
         
     }
     // ---------------
+    // ---- Recoil ----
+    [Range(0, 7f)]
+    [SerializeField] private float recoilX, recoilY;
+
+    public float CurrentRecoilX, CurrentRecoilY;
+
+    [SerializeField] private float snappiness;
+    [SerializeField] private float returnSpeed;
+
+    public void RecoilFire()
+    {
+        CurrentRecoilX = ((Random.value - .5f) / 2) * recoilX;
+        CurrentRecoilY = ((Random.value - .5f) / 2) * recoilY;
+
+        fpc.SetNewRot(CurrentRecoilX, CurrentRecoilY);
+    }
+    // ---------------
 
     // ---- Shoot ----
     IEnumerator Shoot()
     {
         Debug.Log("shoot!");
 
+        RecoilFire();
         // the bullet here
 
 
@@ -126,6 +146,8 @@ public class Gun : MonoBehaviour
         StartCoroutine(FireRateHandler());
         yield return null;
     }
+
+
     IEnumerator FireRateHandler()
     {
         float timeToNextShot = 1 / fireRate;
