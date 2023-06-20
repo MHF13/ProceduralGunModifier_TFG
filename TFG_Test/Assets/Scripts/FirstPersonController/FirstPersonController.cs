@@ -112,15 +112,13 @@ namespace StarterAssets
 
 		private void Update()
 		{
+			CameraRotation();
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
 		}
 
-		private void LateUpdate()
-		{
-			CameraRotation();
-		}
+
 
 		private void GroundedCheck()
 		{
@@ -141,21 +139,21 @@ namespace StarterAssets
 		private float yRot;
 
 		//---
-		float WantedYRotation;
-		float WantedXRotation;
+		float wantedYRotation;
+		float wantedXRotation;
 
-		float CurrentXRotation;
-		float CurrentYRotation;
+		float currentXRotation;
+		float currentYRotation;
 
-		float mouseSensivity = 3f;
+		float mouseSensivity = 4f;
 
-		float rotationYVelocity = 1f, yRotationSpeed = 1f;
-		float rotationXVelocity = 1f, xRotationSpeed = 1f;
+		float rotationYVelocity = 1f, yRotationSpeed = 0.1f;
+		float rotationXVelocity = 1f, xRotationSpeed = 0.1f;
 
-		public void SetNewRot(float x, float y)
+		public void SetNewRot(float x, float y,float gunDispersion)
         {
-			WantedYRotation -= Mathf.Abs(y);
-			WantedXRotation -= x;
+			wantedXRotation -= Mathf.Abs(y * gunDispersion);
+			wantedYRotation -= (x * gunDispersion);
 
 		}
 		private void CameraRotation()
@@ -166,6 +164,11 @@ namespace StarterAssets
 				//Don't multiply mouse input by Time.deltaTime
 				float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
+				wantedYRotation += _input.look.x * mouseSensivity;
+				wantedXRotation += _input.look.y * mouseSensivity;
+				wantedXRotation = Mathf.Clamp(wantedXRotation, BottomClamp, TopClamp);
+				//---------------------------------------------------------------------------------
+				/*
 				WantedYRotation += _input.look.x * mouseSensivity;
 				WantedXRotation += _input.look.y * mouseSensivity;
 
@@ -180,7 +183,7 @@ namespace StarterAssets
 				transform.rotation = Quaternion.Euler(0, CurrentYRotation, 0);
 
 				// Arriba y abajo
-				CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(CurrentXRotation, 0, 0);
+				CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(CurrentXRotation, 0, 0);*/
 
 				//---------------------------------------------------------------------------------
 				/*yRot += (_input.look.y * deltaTimeMultiplier) * RotationSpeed;
@@ -192,10 +195,33 @@ namespace StarterAssets
 			}
 		}
 
+
+		private void FixedUpdate()
+		{
+			currentYRotation = Mathf.SmoothDamp(currentYRotation, wantedYRotation, ref rotationYVelocity, yRotationSpeed);
+			currentXRotation = Mathf.SmoothDamp(currentXRotation, wantedXRotation, ref rotationXVelocity, xRotationSpeed);
+
+			//WeaponRotation();
+
+			transform.rotation = Quaternion.Euler(0, currentYRotation, 0);
+			CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(currentXRotation, 0, 0);
+		}
+
+		private float currentRecoilZPos;
+		private float currentRecoilXPos;
+		private float currentRecoilYPos;
+		[HideInInspector] public float recoilAmount_z = 0.5f;
+		[HideInInspector] public float recoilAmount_x = 0.5f;
+		[HideInInspector] public float recoilAmount_y = 0.5f;
+		
+		private float gunPrecision = 9;
 		public void RecoilFire()
 		{
-			
-			targetRotation += new Vector3(-recoilX, Random.Range(-recoilY, recoilY), 0);
+			currentRecoilZPos -= recoilAmount_z;
+			currentRecoilXPos -= (Random.value - 0.5f) * recoilAmount_x;
+			currentRecoilYPos -= (Random.value - 0.5f) * recoilAmount_y;
+			wantedXRotation -= Mathf.Abs(currentRecoilYPos * gunPrecision);
+			wantedYRotation -= (currentRecoilXPos * gunPrecision);
 		}
 
 		private void Move()

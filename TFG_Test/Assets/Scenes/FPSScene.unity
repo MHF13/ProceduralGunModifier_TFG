@@ -251,13 +251,11 @@ MonoBehaviour:
   reload: 0
   fireRate: 2
   maxAmmo: 0
-  auto: 0
-  recoilX: 6.61
-  recoilY: 4.65
-  CurrentRecoilX: 0
-  CurrentRecoilY: 0
-  snappiness: 0
-  returnSpeed: 0
+  auto: 1
+  ammo: 0
+  recoilX: 1.55
+  recoilY: 2.46
+  bulletHole: {fileID: 179232, guid: 80f08aaa7df62fd4bbcb326dbbf2ba25, type: 3}
 --- !u!1 &447710975
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,6 +822,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1963131210063087321, guid: c586cf3538841514d890672d20aec003, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5901683163350939246, guid: c586cf3538841514d890672d20aec003, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7108815298923114548, guid: c586cf3538841514d890672d20aec003, type: 3}
