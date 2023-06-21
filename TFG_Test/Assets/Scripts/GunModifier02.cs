@@ -58,9 +58,8 @@ public class GunModifier02 : MonoBehaviour
     public bool RandomGun = false;
 
     //------------------------
+    private Gun gun;
     
-    
-
     //-----------------------------------
     private void Start()
     {
@@ -80,8 +79,11 @@ public class GunModifier02 : MonoBehaviour
             blendShape[i] = new BlendShape(newName);
             ret[i] = blendShape[i].weightBS;
         }
-        this.GetComponent<Gun>().SetNewBS(ret);
-
+        if (this.GetComponent<Gun>())
+        {
+            gun = this.GetComponent<Gun>();
+            this.GetComponent<Gun>().SetNewBS(ret);
+        }
 
         // Colors
         materials = GetComponent<Renderer>().materials;
@@ -132,8 +134,6 @@ public class GunModifier02 : MonoBehaviour
         }
     }
 
-
-
     //-------------------------------------------------
     public void RandomForm()
     {
@@ -168,16 +168,7 @@ public class GunModifier02 : MonoBehaviour
     // Updates the value of the model's blendshapes with the ones we have saved
     private void UpdateForm()
     {
-        // old
-
-        /*
-        for (int i = 0; i < numBS; i++)
-        {
-            meshRenderer.SetBlendShapeWeight(i, blendShape[i].weightBS);
-            blendShape[i].setW0(blendShape[i].weightBS);
-        }
-        */
-        // new
+        
         int[] ret = new int[numBS];
         for (int i = 0; i < numBS; i++)
         {
@@ -185,7 +176,8 @@ public class GunModifier02 : MonoBehaviour
             blendShape[i].setW0(blendShape[i].weightBS);
             ret[i] = blendShape[i].weightBS;
         }
-        this.GetComponent<Gun>().SetNewBS(ret);
+
+        if(gun) this.GetComponent<Gun>().SetNewBS(ret);
 
     }
     

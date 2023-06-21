@@ -150,11 +150,10 @@ namespace StarterAssets
 		float rotationYVelocity = 1f, yRotationSpeed = 0.1f;
 		float rotationXVelocity = 1f, xRotationSpeed = 0.1f;
 
-		public void SetNewRot(float x, float y,float gunDispersion)
+		public void SetCamRecoil(float x, float y,float gunDispersion)
         {
 			wantedXRotation -= Mathf.Abs(y * gunDispersion);
 			wantedYRotation -= (x * gunDispersion);
-
 		}
 		private void CameraRotation()
 		{
@@ -167,61 +166,16 @@ namespace StarterAssets
 				wantedYRotation += _input.look.x * mouseSensivity;
 				wantedXRotation += _input.look.y * mouseSensivity;
 				wantedXRotation = Mathf.Clamp(wantedXRotation, BottomClamp, TopClamp);
-				//---------------------------------------------------------------------------------
-				/*
-				WantedYRotation += _input.look.x * mouseSensivity;
-				WantedXRotation += _input.look.y * mouseSensivity;
-
-				WantedXRotation = Mathf.Clamp(WantedXRotation,BottomClamp,TopClamp);
-
-				//CurrentYRotation = Mathf.SmoothDamp(CurrentYRotation, WantedYRotation, ref rotationYVelocity, yRotationSpeed);
-
-				CurrentYRotation = Mathf.Lerp(CurrentYRotation, WantedYRotation, yRotationSpeed);
-				CurrentXRotation = Mathf.Lerp(CurrentXRotation, WantedXRotation,xRotationSpeed);
-								
-				// izquierda y derecha
-				transform.rotation = Quaternion.Euler(0, CurrentYRotation, 0);
-
-				// Arriba y abajo
-				CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(CurrentXRotation, 0, 0);*/
-
-				//---------------------------------------------------------------------------------
-				/*yRot += (_input.look.y * deltaTimeMultiplier) * RotationSpeed;
-				yRot = ClampAngle(yRot, BottomClamp, TopClamp);
-
-				CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(yRot, 0.0f, 0.0f);
-
-				transform.Rotate(Vector3.up * (_input.look.x * deltaTimeMultiplier)); */
 			}
 		}
-
 
 		private void FixedUpdate()
 		{
 			currentYRotation = Mathf.SmoothDamp(currentYRotation, wantedYRotation, ref rotationYVelocity, yRotationSpeed);
 			currentXRotation = Mathf.SmoothDamp(currentXRotation, wantedXRotation, ref rotationXVelocity, xRotationSpeed);
 
-			//WeaponRotation();
-
 			transform.rotation = Quaternion.Euler(0, currentYRotation, 0);
 			CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(currentXRotation, 0, 0);
-		}
-
-		private float currentRecoilZPos;
-		private float currentRecoilXPos;
-		private float currentRecoilYPos;
-		[HideInInspector] public float recoilAmount_z = 0.5f;
-		[HideInInspector] public float recoilAmount_x = 0.5f;
-		[HideInInspector] public float recoilAmount_y = 0.5f;
-		
-		private float gunPrecision = 9;
-		public void RecoilFire()
-		{
-			currentRecoilZPos -= recoilAmount_z;
-			currentRecoilXPos -= (Random.value - 0.5f) * recoilAmount_x;
-			currentRecoilYPos -= (Random.value - 0.5f) * recoilAmount_y;
-			wantedXRotation -= Mathf.Abs(currentRecoilYPos * gunPrecision);
-			wantedYRotation -= (currentRecoilXPos * gunPrecision);
 		}
 
 		private void Move()

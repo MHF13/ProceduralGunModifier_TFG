@@ -4,13 +4,12 @@ using UnityEngine;
 using StarterAssets;
 
 
-
 public class Gun : MonoBehaviour
 {
     private StarterAssetsInputs _inputs;
     private GunModifier02 GM;
     private FirstPersonController fpc;
-    private bool canShoot;
+    private GameManager gameManager;
 
     public GunType type;
 
@@ -32,37 +31,47 @@ public class Gun : MonoBehaviour
     public float fireRate;
     public float maxAmmo;
     [Space]
-    public bool auto;
+    [Header("variables")]
+    public bool auto = false;
     public int ammo;
-
+    public bool reloading;
 
 
     // Start is called before the first frame update
     void Start()
     {
+
         _inputs = transform.parent.parent.GetComponent<StarterAssetsInputs>();
         GM = this.GetComponent<GunModifier02>();
-        canShoot = true;
+        reloading = false;
+
         fpc = transform.parent.parent.GetComponent<FirstPersonController>();
     }
+
+    public void SetGameManager(GameManager GM) { gameManager = GM; }
 
     float waitTillNextFire;
     // Update is called once per frame
     void Update()
     {
 
-        if (_inputs.shoot && canShoot)
+        if (_inputs.shoot && !reloading)
         {
             if (!auto)
             {
                 _inputs.shoot = false;
             }
             ShootMethod();
-            //StartCoroutine(Shoot());
 
+        }
+        if (_inputs.reload && !reloading && ammo < maxAmmo)
+        {
+            Reload();
+            _inputs.reload = false;
         }
         waitTillNextFire -= Time.deltaTime;
     }
+    // ---------------
 
     // ---- Stats ----
     public void SetNewBS(int[] newBS)
@@ -88,7 +97,7 @@ public class Gun : MonoBehaviour
             default:
                 break;
         }
-
+        gameManager.SetReloadTiem(reload);
     }
 
     void PistolStats()
@@ -123,6 +132,7 @@ public class Gun : MonoBehaviour
         ammo = (int)maxAmmo;
     }
     // ---------------
+
     // ---- Recoil ----
     [Space]
     [Range(0, 7f)]
@@ -130,17 +140,30 @@ public class Gun : MonoBehaviour
 
     private float CurrentRecoilX, CurrentRecoilY;
 
-    public void RecoilFire()
+    private void RecoilFire()
     {
         CurrentRecoilX = ((Random.value - .5f) / 2) * recoilX;
         CurrentRecoilY = ((Random.value - .5f) / 2) * recoilY;
 
-        fpc.SetNewRot(CurrentRecoilX, CurrentRecoilY, recoil);
+        fpc.SetCamRecoil(CurrentRecoilX, CurrentRecoilY, recoil);
+    }
+    // ---------------
+    // ---- Reload ----
+    private void Reload()
+    {
+        reloading = true;
+        gameManager.StartReloading();
+    }
+    public void EndReload()
+    {
+        reloading = false;
+        _inputs.shoot = false;
+        ammo = (int)maxAmmo;
     }
     // ---------------
 
     // ---- Shoot ----
-    void ShootMethod()
+    private void ShootMethod()
     {
         //if (waitTillNextFire <= 0 && !reloading)
         if (waitTillNextFire <= 0)
@@ -161,8 +184,8 @@ public class Gun : MonoBehaviour
             }
             else
             {
+                Reload();
                 _inputs.shoot = false;
-                ammo = (int)maxAmmo;
             }
         }
     }
@@ -170,12 +193,21 @@ public class Gun : MonoBehaviour
     private RaycastHit hit;
     private float maxDistance = 1000000;
     [SerializeField] private GameObject bulletHole;
-    void Bullet()
+    private void Bullet()
     {
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, maxDistance))
         {
+            /*
+             * ESTE ES PARA QUE CUANDO DEMOS A UN ENEMIGO LE ENVIEMOS EL VALOR DE DAñO
+                if(hit.transform.tag == "Dummie"){
+					Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
+					Destroy(gameObject);
+			    }
+             */
             Instantiate(bulletHole, hit.point + hit.normal * 0.1f, Quaternion.LookRotation(hit.normal));
         }
     }
 
 }
+
+
