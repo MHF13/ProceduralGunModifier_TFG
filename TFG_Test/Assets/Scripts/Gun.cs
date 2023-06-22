@@ -11,6 +11,12 @@ public class Gun : MonoBehaviour
     private FirstPersonController fpc;
     private GameManager gameManager;
 
+    // No hes necesario el; serialize por see busca en el start, es para que el gizmo funcione
+#pragma warning disable CS0108 // El miembro oculta el miembro heredado. Falta una contraseña nueva
+    [SerializeField]
+    private Camera camera;
+#pragma warning restore CS0108 // El miembro oculta el miembro heredado. Falta una contraseña nueva
+
     public GunType type;
 
     [Range(0, 100)]
@@ -18,11 +24,18 @@ public class Gun : MonoBehaviour
 
     //Base Stats
     private float damage0 = 10f;
-    private float dispersion0 = 5f;
-    private float recoil0 = 10f;
+    private float dispersion0 = 2f;
+    private float recoil0 = 1f;
     private float reload0 = 1.5f;
     private float fireRate0 = 3f;
     private float maxAmmo0 = 12f;
+    private int bulletXShoot0 = 1;
+
+    // TODO: Quitarl el Serial cuando se arregle la dispersion
+    [SerializeField]
+    private int bulletXShoot;
+    private float desviation;
+    
     [Header("Stats")]
     public float damage;
     public float dispersion;
@@ -40,15 +53,14 @@ public class Gun : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        camera = Camera.main.GetComponent<Camera>();
         _inputs = transform.parent.parent.GetComponent<StarterAssetsInputs>();
         GM = this.GetComponent<GunModifier02>();
         reloading = false;
-
         fpc = transform.parent.parent.GetComponent<FirstPersonController>();
     }
 
-    public void SetGameManager(GameManager GM) { gameManager = GM; }
+    public void SetGameManager(GameManager _GM) { gameManager = _GM; }
 
     float waitTillNextFire;
     // Update is called once per frame
@@ -74,8 +86,10 @@ public class Gun : MonoBehaviour
     // ---------------
 
     // ---- Stats ----
-    public void SetNewBS(int[] newBS)
+    public void SetNewBS(int[] newBS, GunType gunType)
     {
+
+        type = gunType;
         if (BS.Length == 0) BS = new int[newBS.Length];
 
         for (int i = 0; i < newBS.Length; i++)
@@ -93,6 +107,7 @@ public class Gun : MonoBehaviour
                 PistolStats();
                 break;
             case GunType.ShootGun:
+                ShootGunStats();
                 break;
             default:
                 break;
@@ -105,9 +120,9 @@ public class Gun : MonoBehaviour
         // Mathf.Exp() = EXP
         // Mathf.Sqrt() = RAIZ
 
-        float[] P1 = { 0.05f, 0.05f, 0.02f, 0.01f, -0.48f, -0.15f };
-        float[] P2 = { 0.01f, 0.01f };
-        float[] P3 = { -0.01f, 0.01f, 0.1f, 0.22f };
+        float[] P1 = { 0.05f, 0.05f, 0.01f, 0.01f, -0.48f, -0.15f };
+        float[] P2 = { -0.02f, 0.01f };
+        float[] P3 = { 0.01f, 0.01f, 0.1f, 0.22f };
 
 
         // Damage
@@ -118,6 +133,7 @@ public class Gun : MonoBehaviour
 
         // Recoil
         recoil = (Mathf.Exp(BS[0] * P1[2]) - Mathf.Exp(BS[1] * P2[1])) * 2 + recoil0;
+        if (recoil < 0.5f) recoil = 0.5f;
 
         // Reload
         reload = BS[0] * P1[3] + BS[2] * P3[1] + reload0;
@@ -128,8 +144,15 @@ public class Gun : MonoBehaviour
 
         // MaxAmmo
         maxAmmo = (int)(BS[0] * P1[5] + BS[2] * P3[3] + maxAmmo0);
-        if (maxAmmo < 1) maxAmmo = 1;
+        if (maxAmmo < 3) maxAmmo = 3;
         ammo = (int)maxAmmo;
+
+        // when shoot you shoot x bullets
+        bulletXShoot = bulletXShoot0;
+    }
+    void ShootGunStats()
+    {
+        //Create stats for other gun type
     }
     // ---------------
 
@@ -142,8 +165,8 @@ public class Gun : MonoBehaviour
 
     private void RecoilFire()
     {
-        CurrentRecoilX = ((Random.value - .5f) / 2) * recoilX;
-        CurrentRecoilY = ((Random.value - .5f) / 2) * recoilY;
+        CurrentRecoilX = ((Random.value - .5f) / 2) * 1.5f;
+        CurrentRecoilY = ((Random.value - .5f) / 2) * 1.5f;
 
         fpc.SetCamRecoil(CurrentRecoilX, CurrentRecoilY, recoil);
     }
@@ -170,17 +193,14 @@ public class Gun : MonoBehaviour
         {
             if (ammo > 0)
             {
-                Debug.Log("shoot!");
-
                 // the bullet here
-                Bullet();
-
-
+                for (int i = 0; i < bulletXShoot; i++)
+                {
+                    Bullet();
+                }
                 RecoilFire();
-
                 ammo--;
                 waitTillNextFire = 1/fireRate;
-
             }
             else
             {
@@ -195,7 +215,21 @@ public class Gun : MonoBehaviour
     [SerializeField] private GameObject bulletHole;
     private void Bullet()
     {
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, maxDistance))
+        Vector3 direction = Desviation();
+        //--
+        //
+        if (Physics.Raycast(camera.transform.position, direction, out hit, maxDistance))
+        {
+            Debug.DrawLine(camera.transform.position, hit.point, Color.green, 1f);
+        }
+        else
+        {
+            Debug.DrawLine(camera.transform.position, camera.transform.position + direction * maxDistance, Color.red, 1f);
+        }
+        //--
+
+
+        if (Physics.Raycast(Camera.main.transform.position, direction, out hit, maxDistance))
         {
             /*
              * ESTE ES PARA QUE CUANDO DEMOS A UN ENEMIGO LE ENVIEMOS EL VALOR DE DAñO
@@ -206,8 +240,48 @@ public class Gun : MonoBehaviour
              */
             Instantiate(bulletHole, hit.point + hit.normal * 0.1f, Quaternion.LookRotation(hit.normal));
         }
+        else
+        {
+            // Fail shoot
+        }
     }
+    private Vector3 Desviation()
+    {
+        desviation = dispersion / 10;
+        //
+        //using Random = UnityEngine.Random;
+        Vector3 direction = camera.transform.forward; // your initial aim.
+        Vector3 spread = Vector3.zero;
+        spread += camera.transform.up * Random.Range(-desviation, desviation); // add random up or down (because random can get negative too)
+        spread += camera.transform.right * Random.Range(-desviation, desviation); // add random left or right
 
+        // Using random up and right values will lead to a square spray pattern. If we normalize this vector, we'll get the spread direction, but as a circle.
+        // Since the radius is always 1 then (after normalization), we need another random call. 
+        return direction += spread.normalized * Random.Range(0, desviation/100);
+    }
+    // ---------------
+
+    //Gizmos 
+    //Para ver la dispersion que puede tener el arma sin ejecutar
+    private void OnDrawGizmosSelected()
+    {
+        // the bullet here
+        for (int i = 0; i < bulletXShoot; i++)
+        {
+            Vector3 direction = Desviation();
+            //--
+            //
+            if (Physics.Raycast(camera.transform.position, direction, out hit, maxDistance))
+            {
+                Debug.DrawLine(camera.transform.position, hit.point, Color.green, 1f);
+            }
+            else
+            {
+                Debug.DrawLine(camera.transform.position, camera.transform.position + direction * maxDistance, Color.red, 1f);
+            }
+            //--
+        }
+    }
 }
 
 

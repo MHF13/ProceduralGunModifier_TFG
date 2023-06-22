@@ -8,6 +8,7 @@ TagManager:
   - HUD
   - Gun
   - HUDReload
+  - Dummie
   layers:
   - Default
   - TransparentFX

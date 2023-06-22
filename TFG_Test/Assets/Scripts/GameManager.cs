@@ -13,21 +13,29 @@ public class GameManager : MonoBehaviour
     private GameManager gameManager;
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        hud.SetGameManager(this);
+        theGun.SetGameManager(this);
+
+    }
+
     void Start()
     {
+        /*
         if (!hud)
         {
             Debug.Log("No hay hud puesto"); 
             hud = GameObject.FindGameObjectWithTag("HUDReload").GetComponent<HUDReload>();
         }
-            hud.SetGameManager(this);
+        //hud.SetGameManager(this);
         if (!theGun)
         {
             Debug.Log("No hay hud puesto");
             theGun = GameObject.FindGameObjectWithTag("Gun").GetComponent<Gun>();
         }
-            theGun.SetGameManager(this);
-
+        Debug.Log("GameManager");
+        //theGun.SetGameManager(this);*/
     }
 
     public HUDReload GetHUD() { return hud; }

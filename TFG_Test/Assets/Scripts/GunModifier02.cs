@@ -35,7 +35,8 @@ public class GunModifier02 : MonoBehaviour
 
     // Esto sera para seleccionar otro modelo
     // Aun no haremos nada con eso
-    public GunType type;
+    public GunType actType;
+    private GunType newType;
 
     [Header("blendShapes")]
     [SerializeField]
@@ -79,10 +80,11 @@ public class GunModifier02 : MonoBehaviour
             blendShape[i] = new BlendShape(newName);
             ret[i] = blendShape[i].weightBS;
         }
+        newType = actType;
         if (this.GetComponent<Gun>())
         {
             gun = this.GetComponent<Gun>();
-            this.GetComponent<Gun>().SetNewBS(ret);
+            this.GetComponent<Gun>().SetNewBS(ret,actType);
         }
 
         // Colors
@@ -101,7 +103,8 @@ public class GunModifier02 : MonoBehaviour
     void Update()
     {
         // Form
-        if (ChangeForm())
+        //El type devera tener uno de estos aparte para modificar el modelo del arma
+        if (ChangeForm() || newType != actType)
         {
             UpdateForm();
         }
@@ -177,7 +180,7 @@ public class GunModifier02 : MonoBehaviour
             ret[i] = blendShape[i].weightBS;
         }
 
-        if(gun) this.GetComponent<Gun>().SetNewBS(ret);
+        if(gun) this.GetComponent<Gun>().SetNewBS(ret,actType);
 
     }
     
