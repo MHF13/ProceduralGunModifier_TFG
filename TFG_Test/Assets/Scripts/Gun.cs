@@ -180,7 +180,7 @@ public class Gun : MonoBehaviour
     public void EndReload()
     {
         reloading = false;
-        _inputs.shoot = false;
+        _inputs.reload = false;
         ammo = (int)maxAmmo;
     }
     // ---------------

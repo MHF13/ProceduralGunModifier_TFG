@@ -56,7 +56,7 @@
                     "id": "767124f8-a448-4da2-8b35-6c52f525b499",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -254,7 +254,7 @@
                     "path": "<Keyboard>/#(R)",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardMouse",
                     "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
