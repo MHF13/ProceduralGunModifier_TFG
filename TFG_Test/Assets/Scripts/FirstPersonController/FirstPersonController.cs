@@ -112,13 +112,14 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			CameraRotation();
-			JumpAndGravity();
+			//JumpAndGravity();
 			GroundedCheck();
 			Move();
 		}
-
-
+		private void LateUpdate()
+		{
+			CameraRotation();
+		}
 
 		private void GroundedCheck()
 		{
@@ -150,8 +151,11 @@ namespace StarterAssets
 		float rotationYVelocity = 1f, yRotationSpeed = 0.1f;
 		float rotationXVelocity = 1f, xRotationSpeed = 0.1f;
 
-		public void SetCamRecoil(float x, float y,float gunDispersion)
+		public void SetCamRecoil(float gunDispersion)
         {
+			float x = ((Random.value - .5f) / 2) * 1.5f;
+			float y = ((Random.value - .5f) / 2) * 1.5f;
+
 			wantedXRotation -= Mathf.Abs(y * gunDispersion);
 			wantedYRotation -= (x * gunDispersion);
 		}
@@ -218,7 +222,7 @@ namespace StarterAssets
 			if (_input.move != Vector2.zero)
 			{
 				// move
-				inputDirection = CinemachineCameraTarget.transform.right * _input.move.x + CinemachineCameraTarget.transform.forward * _input.move.y;
+				inputDirection = this.transform.right * _input.move.x + this.transform.forward * _input.move.y;
 			}
 
 			// move the player

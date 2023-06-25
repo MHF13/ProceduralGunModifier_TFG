@@ -80,6 +80,7 @@ public class GunModifier02 : MonoBehaviour
             blendShape[i] = new BlendShape(newName);
             ret[i] = blendShape[i].weightBS;
         }
+
         newType = actType;
         if (this.GetComponent<Gun>())
         {
@@ -103,7 +104,6 @@ public class GunModifier02 : MonoBehaviour
     void Update()
     {
         // Form
-        //El type devera tener uno de estos aparte para modificar el modelo del arma
         if (ChangeForm() || newType != actType)
         {
             UpdateForm();
@@ -171,7 +171,6 @@ public class GunModifier02 : MonoBehaviour
     // Updates the value of the model's blendshapes with the ones we have saved
     private void UpdateForm()
     {
-        
         int[] ret = new int[numBS];
         for (int i = 0; i < numBS; i++)
         {
@@ -181,7 +180,6 @@ public class GunModifier02 : MonoBehaviour
         }
 
         if(gun) this.GetComponent<Gun>().SetNewBS(ret,actType);
-
     }
     
     // Assigns a random new valor for our blend shapes

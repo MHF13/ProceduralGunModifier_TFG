@@ -38,19 +38,18 @@ public class HUDReload : MonoBehaviour
 
         // Cambio de valores para que se vea correctamente
         arc.transform.rotation = Quaternion.Euler(0, 0, (90 - (180 * ArcLength)));
-        arc.fillAmount = (-(90 - (180 * ArcLength) + 90) / 180) + 1;
+        arc.fillAmount = (-(180 - (180 * ArcLength)) / 180) + 1;
         fill = arc.fillAmount;
         endProgresion = 360 * fill;
         actualTime = 0;
     }
 
-
-    public void StartReloading()
-    {
-        this.gameObject.SetActive(true);
-        actualTime = 0;
-        Reloading = true;
-    }
+public void StartReloading()
+{
+    this.gameObject.SetActive(true);
+    actualTime = 0;
+    Reloading = true;
+}
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -63,7 +62,6 @@ public class HUDReload : MonoBehaviour
 
             guide.transform.localRotation = Quaternion.Euler(0, 0, progression * endProgresion);
 
-            //Al acabar la recarga se avisa al manager y se desactiva el HUD
             if (progression >= 1)
             {
                 Reloading = false;
@@ -71,7 +69,5 @@ public class HUDReload : MonoBehaviour
                 this.gameObject.SetActive(false);
             }
         }
-
     }
-
 }

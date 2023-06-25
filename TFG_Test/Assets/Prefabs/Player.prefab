@@ -332,34 +332,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb64a4fa750c2284d9d5594048017f27, type: 3}
---- !u!1 &8155659887201410123 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1874412106795104653, guid: bb64a4fa750c2284d9d5594048017f27, type: 3}
-  m_PrefabInstance: {fileID: 7722976913634649542}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &9209533970602095232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8155659887201410123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5ee9595bec63904a986af5a2e2021f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  BS: 
-  damage: 0
-  dispersion: 0
-  recoil: 0
-  reload: 0
-  fireRate: 0
-  maxAmmo: 0
-  auto: 0
-  ammo: 0
-  reloading: 0
-  recoilX: 1.61
-  recoilY: 1.58
-  bulletHole: {fileID: 179232, guid: 80f08aaa7df62fd4bbcb326dbbf2ba25, type: 3}

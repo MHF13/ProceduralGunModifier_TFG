@@ -10,14 +10,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Gun theGun;
 
-    private GameManager gameManager;
-
     // Start is called before the first frame update
     private void Awake()
     {
         hud.SetGameManager(this);
         theGun.SetGameManager(this);
-
     }
 
     void Start()
@@ -40,15 +37,8 @@ public class GameManager : MonoBehaviour
 
     public HUDReload GetHUD() { return hud; }
 
-    public void SetReloadTiem(float reloadTime) { hud.SetNewTime(reloadTime); }
+    public void SetReloadTime(float reloadTime) { hud.SetNewTime(reloadTime); }
     public void StartReloading() { hud.StartReloading(); }
     public void EndReloading() { theGun.EndReload(); }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
 }
