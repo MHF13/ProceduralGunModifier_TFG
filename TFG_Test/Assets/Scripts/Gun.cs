@@ -7,9 +7,12 @@ using StarterAssets;
 public class Gun : MonoBehaviour
 {
     [SerializeField] private GameObject PlayerCapsule;
+
     private StarterAssetsInputs _inputs;
     private FirstPersonController fpc;
     private GameManager gameManager;
+
+
 
     // No hes necesario el; serialize por see busca en el start, es para que el gizmo funcione
 #pragma warning disable CS0108 // El miembro oculta el miembro heredado. Falta una contraseña nueva
@@ -192,33 +195,32 @@ public void EndReload()
     private RaycastHit hit;
     private float maxDis = 1000000;
     [SerializeField] private GameObject bulletHole;
-private void Bullet()
-{
-    Vector3 direction = Desviation();
-    if (Physics.Raycast(camera.transform.position, direction, out hit, maxDis))
+    [SerializeField] private BulletHollePooling bulletHollePooling;
+    private void Bullet()
     {
-        Debug.DrawLine(camera.transform.position, hit.point, Color.green, 0.1f);
+        Vector3 direction = Desviation();
+        if (Physics.Raycast(Camera.main.transform.position, direction, out hit, maxDis))
+        {
+
+                if (hit.transform.CompareTag("Dummie"))
+                {
+                    bulletHollePooling.RequesHole(hit, BulletHitParticle.ParticleType.Damage,damage);
+
+                    /*DestroyAfterTimeParticle holle = Instantiate(bulletHole, hit.point + hit.normal * 0.1f, Quaternion.LookRotation(hit.normal)).GetComponent<DestroyAfterTimeParticle>();
+                    holle.Efect(DestroyAfterTimeParticle.ParticleType.Damage, damage);*/
+                }
+                else
+                {
+                    bulletHollePooling.RequesHole(hit, BulletHitParticle.ParticleType.None);
+                    //Instantiate(bulletHole, hit.point + hit.normal * 0.1f, Quaternion.LookRotation(hit.normal));
+                }
+                
+        }
+        else
+        {
+            // Fail shoot
+        }
     }
-    else
-    {
-        Debug.DrawLine(camera.transform.position, camera.transform.position + direction * maxDis, Color.red,0.1f);
-    }
-    if (Physics.Raycast(Camera.main.transform.position, direction, out hit, maxDis))
-    {
-        /*
-            * ESTE ES PARA QUE CUANDO DEMOS A UN ENEMIGO LE ENVIEMOS EL VALOR DE DAñO
-            if(hit.transform.tag == "Dummie"){
-				Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
-				Destroy(gameObject);
-			}
-            */
-        Instantiate(bulletHole, hit.point + hit.normal * 0.1f,Quaternion.LookRotation(hit.normal));
-    }
-    else
-    {
-        // Fail shoot
-    }
-}
 private Vector3 Desviation()
 {
     float desviation = dispersion / 10;
