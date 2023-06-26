@@ -42,7 +42,6 @@ public class BulletHollePooling : MonoBehaviour
             {
                 index = i;
                 List[i].GetComponent<BulletHitParticle>().ResetStart(hit, type, damage);
-                Debug.Log(index);
                 return;
             }
         }

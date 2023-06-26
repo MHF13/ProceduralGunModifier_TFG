@@ -48,19 +48,7 @@ public class BulletHitParticle : MonoBehaviour
         {
             case ParticleType.Damage:
 
-                //Text.transform.rotation.LookAt(Camera.main.transform.position,Vector3.right);
-
-                //transform.rotation = Quaternion.LookRotation(Camera.main.transform.position,Vector3.up);
-
-                //transform.localRotation = Quaternion.LookRotation(Camera.main.transform.position);
-                //transform.rotation += Quaternion.Euler(Vector3.up * 180f);*/
-
-                transform.LookAt(Camera.main.transform.position);
-
-                //transform.rotation = Quaternion.LookRotation(Camera.main.transform.position, Vector3.up*180f);
-
-                //Text.fontSize = Mathf.Lerp (maxScale,minScale, timeToDesactive*2);
-                //transform.localPosition = Vector3.Lerp(transform.localPosition,endPos, timeToDesactive);
+                transform.forward = Camera.main.transform.forward;
 
                 break;
             default:
