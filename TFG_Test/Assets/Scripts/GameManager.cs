@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarterAssets;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,15 +11,26 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Gun theGun;
 
+    [SerializeField]
+    private FirstPersonController firstPerson;
+
+    [SerializeField]
+    private PauseManager pauseManager;
+
+    private bool pause;
+
     // Start is called before the first frame update
     private void Awake()
     {
         hud.SetGameManager(this);
         theGun.SetGameManager(this);
+        pauseManager.SetGameManager(this);
+        firstPerson.SetGameManager(this);
     }
 
     void Start()
     {
+        pause = false;
         /*
         if (!hud)
         {
@@ -33,6 +45,20 @@ public class GameManager : MonoBehaviour
         }
         Debug.Log("GameManager");
         //theGun.SetGameManager(this);*/
+    }
+
+    public void SetActivePauseMenu(bool state)
+    {
+        pause = state;
+        pauseManager.gameObject.SetActive(pause);
+        firstPerson.setPause(pause);
+
+        hud.gameObject.SetActive(pause);
+
+        if (pause == true)
+        {
+            pauseManager.GetBSValues();
+        }
     }
 
     public HUDReload GetHUD() { return hud; }

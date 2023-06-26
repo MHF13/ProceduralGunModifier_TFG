@@ -15,6 +15,7 @@ namespace StarterAssets
 
 		public bool shoot;
 		public bool reload;
+		public bool pause;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -56,6 +57,11 @@ namespace StarterAssets
 			ReloadInput(value.isPressed);
 		}
 
+		public void OnPause(InputValue value)
+		{
+			PauseInput(value.isPressed);
+		}
+
 
 #endif
 
@@ -89,12 +95,17 @@ namespace StarterAssets
 			reload = value;
 		}
 
+		public void PauseInput(bool value)
+		{
+			pause = value;
+		}
+
 		private void OnApplicationFocus(bool hasFocus)
 		{
 			SetCursorState(cursorLocked);
 		}
 
-		private void SetCursorState(bool newState)
+		public void SetCursorState(bool newState)
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}

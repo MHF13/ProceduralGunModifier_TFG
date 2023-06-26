@@ -71,6 +71,9 @@ namespace StarterAssets
 		private CharacterController _controller;
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
+		private GameManager gameManager;
+
+		private bool pause;
 
 		private const float _threshold = 0.01f;
 
@@ -94,9 +97,11 @@ namespace StarterAssets
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
 		}
+		public void SetGameManager(GameManager _GM) { gameManager = _GM; }
 
 		private void Start()
 		{
+			pause = false;
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM
@@ -110,14 +115,19 @@ namespace StarterAssets
 			_fallTimeoutDelta = FallTimeout;
 		}
 
+		public void setPause(bool state) { pause = state; }
+
 		private void Update()
 		{
+			if (pause) return;
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+
 		}
 		private void LateUpdate()
 		{
+			if (pause) return;
 			CameraRotation();
 		}
 

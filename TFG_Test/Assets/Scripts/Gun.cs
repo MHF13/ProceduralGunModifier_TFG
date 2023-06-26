@@ -13,7 +13,6 @@ public class Gun : MonoBehaviour
     private GameManager gameManager;
 
 
-
     // No hes necesario el; serialize por see busca en el start, es para que el gizmo funcione
 #pragma warning disable CS0108 // El miembro oculta el miembro heredado. Falta una contraseña nueva
     [SerializeField]
@@ -52,7 +51,8 @@ public class Gun : MonoBehaviour
     public bool auto = false;
     public int ammo;
     public bool reloading;
-
+    //Todo: cambiar a privado
+    public bool pause;
 
     // Start is called before the first frame update
     void Awake()
@@ -60,6 +60,7 @@ public class Gun : MonoBehaviour
         camera = Camera.main.GetComponent<Camera>();
         _inputs = PlayerCapsule.GetComponent<StarterAssetsInputs>();
         reloading = false;
+        pause = false;
         fpc = PlayerCapsule.GetComponent<FirstPersonController>();
     }
 
@@ -69,6 +70,16 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_inputs.pause)
+        {
+            _inputs.pause = false;
+            pause = !pause;
+            _inputs.SetCursorState(!pause);
+            gameManager.SetActivePauseMenu(pause);
+        }
+
+        if (pause){ return; }
+
         if (_inputs.shoot && !reloading)
         {
             if (!auto)_inputs.shoot = false;

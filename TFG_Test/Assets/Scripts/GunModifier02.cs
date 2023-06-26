@@ -156,6 +156,15 @@ public class GunModifier02 : MonoBehaviour
 
     // Form
     // Checks whether the values of sliders have been altered
+    public void SetNewForm(int[] newBS)
+    {
+        for (int i = 0; i < newBS.Length; i++)
+        {
+            blendShape[i].weightBS = newBS[i]; 
+        }
+        UpdateForm();
+    } 
+
     private bool ChangeForm()
     {
         foreach (var item in blendShape)
