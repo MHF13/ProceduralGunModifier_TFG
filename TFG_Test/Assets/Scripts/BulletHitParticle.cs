@@ -34,7 +34,20 @@ public class BulletHitParticle : MonoBehaviour
     {
         gameObject.SetActive(true);
 
-        transform.SetPositionAndRotation(hit.point + hit.normal * 0.5f, Quaternion.LookRotation(hit.normal));
+        switch (type)
+        {
+            case ParticleType.None:
+                
+                transform.SetPositionAndRotation(hit.point + hit.normal * 0.01f, Quaternion.LookRotation(hit.normal));
+                break;
+            case ParticleType.Damage:
+
+                transform.SetPositionAndRotation(hit.point + hit.normal * 0.1f, Quaternion.LookRotation(hit.normal));
+                break;
+            default:
+                break;
+        }
+
 
         //startPos = hit.point + hit.normal * 0.1f;
 

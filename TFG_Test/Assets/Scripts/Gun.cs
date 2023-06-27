@@ -27,7 +27,7 @@ public class Gun : MonoBehaviour
     //Base Stats
     private float damage0 = 10f;
     private float dispersion0 = 2f;
-    private float recoil0 = 1f;
+    private float recoil0 = 2.5f;
     private float reload0 = 1.5f;
     private float fireRate0 = 3f;
     private float maxAmmo0 = 12f;
@@ -129,38 +129,40 @@ public class Gun : MonoBehaviour
         // Mathf.Exp() = EXP
         // Mathf.Sqrt() = RAIZ
 
-        float[] P1 = { 0.05f, 0.05f, 0.01f, 0.01f, -0.48f, -0.15f };
+        float[] P1 = { 0.05f, 0.05f, 0.02f, 0.01f, -0.48f, -0.15f };
         float[] P2 = { -0.02f, 0.01f };
-        float[] P3 = { 0.01f, 0.01f, 0.1f, 0.22f };
+        float[] P3 = { 0.02f, 0.01f, 0.1f, 0.22f };
 
 
-        float[] stats = new float[6];
         // Damage
         damage = (100 - Mathf.Exp(-BS[0] * P1[0]) * 100) + damage0;
-        stats[0] = damage;
 
         // Dispersion
         dispersion = BS[0] * P1[1] + BS[1] * P2[0] + BS[2] * P3[0] + dispersion0;
-        stats[1] = dispersion;
+        if (dispersion < 0) dispersion = 0;
 
         // Recoil
-        recoil = (Mathf.Exp(BS[0] * P1[2]) - Mathf.Exp(BS[1] * P2[1])) * 2 + recoil0;
+        recoil = (Mathf.Exp(BS[0] * P1[2]) - Mathf.Exp(BS[1] * P2[1])) * 3 + recoil0;
         if (recoil < 0.5f) recoil = 0.5f;
-        stats[2] = recoil;
 
         // Reload
         reload = BS[0] * P1[3] + BS[2] * P3[1] + reload0;
-        stats[3] = reload;
 
         // FireRate
         fireRate = -Mathf.Sqrt(-(BS[0] + 1) * P1[4]) * Mathf.Sqrt(((BS[2] * P3[2]))) - (-fireRate0 - (BS[2] / 5));
         if (fireRate < 3) fireRate = 3;
-        stats[4] = fireRate;
 
         // MaxAmmo
         maxAmmo = (int)(BS[0] * P1[5] + BS[2] * P3[3] + maxAmmo0);
         if (maxAmmo < 3) maxAmmo = 3;
         ammo = (int)maxAmmo;
+
+        float[] stats = new float[6];
+        stats[0] = damage;
+        stats[1] = dispersion;
+        stats[2] = recoil;
+        stats[3] = reload;
+        stats[4] = fireRate;
         stats[5] = maxAmmo;
 
         gameManager.SetNewStats(stats);

@@ -15,7 +15,7 @@ public class PanelSlider : MonoBehaviour
 
     private int actualvalue , ID;
 
-    public void SetValues(int id, int value, string name, PauseManager pm)
+    public void SetNewValues(int id, int value, string name, PauseManager pm)
     {
         pauseManager = pm;
         ID = id;
@@ -23,6 +23,11 @@ public class PanelSlider : MonoBehaviour
         slider.value = actualvalue;
 
         Text.text = name;
+    }
+
+    public void SetValue(int value)
+    {
+        slider.value = value;
     }
     public void Postition(float newPos)
     {

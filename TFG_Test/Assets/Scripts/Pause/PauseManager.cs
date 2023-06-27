@@ -64,7 +64,7 @@ public class PauseManager : MonoBehaviour
             sliders.Add(go);
             
             PanelSlider a = go.GetComponent<PanelSlider>();
-            a.SetValues(i,values[i],names[i], this);
+            a.SetNewValues(i,values[i],names[i], this);
             a.Postition(a.gameObject.GetComponent<RectTransform>().rect.height * (values.Length-(i+1)));
         }
     }
@@ -85,6 +85,18 @@ public class PauseManager : MonoBehaviour
             StatsNum.text += stats[i].ToString() + "\n";
         }
     }
+
+    public void RandomBS()
+    {
+        for (int i = 0; i < values.Length; i++)
+        {
+            values[i] = Random.Range(0, 100);
+            sliders[i].GetComponent<PanelSlider>().SetValue(values[i]);
+        }
+        gunProyection.SetNewForm(values);
+        gunModifier.SetNewForm(values);
+    }
+
 
     public void ChangeAutomatic()
     {
