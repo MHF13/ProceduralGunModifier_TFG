@@ -1,23 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
     public List<GameObject> sliders;
     private GameManager gameManager;
 
-    [SerializeField] private GunModifier02 gunModifier;
+
     [SerializeField] private Gun TheGun;
+    private GunModifier02 gunModifier;
+
+    [SerializeField] private GunMod gunProyection;
 
     [Range(0, 100)]
-    public int[] values;
-    public string[] names;
+    private int[] values;
+    private string[] names;
 
     [SerializeField] private Transform Panel;
-    [SerializeField] private GameObject PanelSliderPrebab;
+    [SerializeField] private GameObject SliderBSPrebab;
+    [SerializeField] private GameObject ToggleAutomatic;
+    [SerializeField] private TMPro.TextMeshProUGUI StatsNum;
 
     public void SetGameManager(GameManager _GM) { gameManager = _GM; }
+
+    private void Awake()
+    {
+        gunModifier = TheGun.gameObject.GetComponent<GunModifier02>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +59,7 @@ public class PauseManager : MonoBehaviour
     {
         for (int i = values.Length - 1; i >= 0 ; i--)
         {
-            GameObject go = Instantiate(PanelSliderPrebab, Panel);
+            GameObject go = Instantiate(SliderBSPrebab, Panel);
 
             sliders.Add(go);
             
@@ -62,6 +73,21 @@ public class PauseManager : MonoBehaviour
     {
         values[id] = value;
 
+        gunProyection.SetNewForm(values);
         gunModifier.SetNewForm(values);
+    }
+
+    public void SetStats(float[] stats)
+    {
+        StatsNum.text = "";
+        for (int i = 0; i < stats.Length; i++)
+        {
+            StatsNum.text += stats[i].ToString() + "\n";
+        }
+    }
+
+    public void ChangeAutomatic()
+    {
+        TheGun.ChangeAutomatic(ToggleAutomatic.GetComponent<Toggle>().isOn);
     }
 }

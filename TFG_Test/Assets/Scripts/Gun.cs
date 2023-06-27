@@ -33,8 +33,6 @@ public class Gun : MonoBehaviour
     private float maxAmmo0 = 12f;
     private int bulletXShoot0 = 1;
 
-
-    
     [Header("Stats")]
     public float damage;
     public float dispersion;
@@ -94,6 +92,11 @@ public class Gun : MonoBehaviour
     }
     // ---------------
     #region Stats
+
+    public void ChangeAutomatic(bool _auto)
+    {
+        auto = _auto;
+    }
     public void SetNewBS(int[] newBS, GunType gunType)
     {
 
@@ -131,27 +134,36 @@ public class Gun : MonoBehaviour
         float[] P3 = { 0.01f, 0.01f, 0.1f, 0.22f };
 
 
+        float[] stats = new float[6];
         // Damage
         damage = (100 - Mathf.Exp(-BS[0] * P1[0]) * 100) + damage0;
+        stats[0] = damage;
 
         // Dispersion
         dispersion = BS[0] * P1[1] + BS[1] * P2[0] + BS[2] * P3[0] + dispersion0;
+        stats[1] = dispersion;
 
         // Recoil
         recoil = (Mathf.Exp(BS[0] * P1[2]) - Mathf.Exp(BS[1] * P2[1])) * 2 + recoil0;
         if (recoil < 0.5f) recoil = 0.5f;
+        stats[2] = recoil;
 
         // Reload
         reload = BS[0] * P1[3] + BS[2] * P3[1] + reload0;
+        stats[3] = reload;
 
         // FireRate
         fireRate = -Mathf.Sqrt(-(BS[0] + 1) * P1[4]) * Mathf.Sqrt(((BS[2] * P3[2]))) - (-fireRate0 - (BS[2] / 5));
         if (fireRate < 3) fireRate = 3;
+        stats[4] = fireRate;
 
         // MaxAmmo
         maxAmmo = (int)(BS[0] * P1[5] + BS[2] * P3[3] + maxAmmo0);
         if (maxAmmo < 3) maxAmmo = 3;
         ammo = (int)maxAmmo;
+        stats[5] = maxAmmo;
+
+        gameManager.SetNewStats(stats);
 
         // when shoot you shoot x bullets
         bulletXShoot = bulletXShoot0;
@@ -247,7 +259,6 @@ private Vector3 Desviation()
     return direction += spread.normalized * Random.Range(0, desviation/100);
 }
     #endregion
-
 
     // -------Gizmos--------
 

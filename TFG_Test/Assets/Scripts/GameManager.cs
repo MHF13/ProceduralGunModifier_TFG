@@ -61,6 +61,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetNewStats(float[] stats)
+    {
+        pauseManager.SetStats(stats);
+    }
+
     public HUDReload GetHUD() { return hud; }
 
     public void SetReloadTime(float reloadTime) { hud.SetNewTime(reloadTime); }

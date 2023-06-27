@@ -29,19 +29,15 @@ public class PanelSlider : MonoBehaviour
         this.transform.position = new Vector3(0, newPos, 0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (slider.value != actualvalue)
-        {
-            actualvalue = (int)slider.value;
-            SendNewValue();
-        }
-    }
     public void SendNewValue()
     {
         pauseManager.UpdateBS(ID, actualvalue);
     }
     
+    public void ChangeValue()
+    {
+        actualvalue = (int)slider.value;
+        SendNewValue();
+    }
 
 }
