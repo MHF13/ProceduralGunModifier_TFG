@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     {
         hud.SetGameManager(this);
         theGun.SetGameManager(this);
-        pauseManager.SetGameManager(this);
+        //pauseManager.SetGameManager(this);
         firstPerson.SetGameManager(this);
     }
 
@@ -53,12 +53,11 @@ public class GameManager : MonoBehaviour
         pauseManager.gameObject.SetActive(pause);
         firstPerson.setPause(pause);
 
-        hud.gameObject.SetActive(pause);
+        hud.transform.parent.gameObject.SetActive(!pause);
 
         if (pause == true)
-        {
             pauseManager.GetBSValues();
-        }
+            
     }
 
     public void SetNewStats(float[] stats)

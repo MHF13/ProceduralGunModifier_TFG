@@ -6,11 +6,10 @@ using UnityEngine.UI;
 public class PauseManager : MonoBehaviour
 {
     public List<GameObject> sliders;
-    private GameManager gameManager;
-
+    //private GameManager gameManager;
 
     [SerializeField] private Gun TheGun;
-    private GunModifier02 gunModifier;
+    private GunModifier gunModifier;
 
     [SerializeField] private GunMod gunProyection;
 
@@ -20,20 +19,14 @@ public class PauseManager : MonoBehaviour
 
     [SerializeField] private Transform Panel;
     [SerializeField] private GameObject SliderBSPrebab;
-    [SerializeField] private GameObject ToggleAutomatic;
     [SerializeField] private TMPro.TextMeshProUGUI StatsNum;
 
-    public void SetGameManager(GameManager _GM) { gameManager = _GM; }
+    //public void SetGameManager(GameManager _GM) { gameManager = _GM; }
 
     private void Awake()
     {
-        gunModifier = TheGun.gameObject.GetComponent<GunModifier02>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
         this.gameObject.SetActive(false);
+        gunModifier = TheGun.gameObject.GetComponent<GunModifier>();
     }
 
     public void GetBSValues()
@@ -53,7 +46,6 @@ public class PauseManager : MonoBehaviour
             GenerdNewBP();
         }
     }
-
 
     public void GenerdNewBP()
     {
@@ -86,6 +78,8 @@ public class PauseManager : MonoBehaviour
         }
     }
 
+
+    ///------------------------------
     public void RandomBS()
     {
         for (int i = 0; i < values.Length; i++)
@@ -93,11 +87,20 @@ public class PauseManager : MonoBehaviour
             values[i] = Random.Range(0, 100);
             sliders[i].GetComponent<PanelSlider>().SetValue(values[i]);
         }
+        Color[] colors = new Color[values.Length];
+        for (int i = 0; i < gunModifier.color.Length; i++)
+        {
+            colors[i] = Random.ColorHSV();
+        }
+
+        gunProyection.SetColors(colors);
+        gunModifier.SetColors(colors);
+
         gunProyection.SetNewForm(values);
         gunModifier.SetNewForm(values);
     }
 
-
+    [SerializeField] private GameObject ToggleAutomatic;
     public void ChangeAutomatic()
     {
         TheGun.ChangeAutomatic(ToggleAutomatic.GetComponent<Toggle>().isOn);

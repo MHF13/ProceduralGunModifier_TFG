@@ -122,6 +122,15 @@ public class Gun : MonoBehaviour
             default:
                 break;
         }
+        float[] stats = new float[6];
+        stats[0] = damage;
+        stats[1] = dispersion;
+        stats[2] = recoil;
+        stats[3] = reload;
+        stats[4] = fireRate;
+        stats[5] = maxAmmo;
+
+        gameManager.SetNewStats(stats);
         gameManager.SetReloadTime(reload);
     }
     void PistolStats()
@@ -156,16 +165,6 @@ public class Gun : MonoBehaviour
         maxAmmo = (int)(BS[0] * P1[5] + BS[2] * P3[3] + maxAmmo0);
         if (maxAmmo < 3) maxAmmo = 3;
         ammo = (int)maxAmmo;
-
-        float[] stats = new float[6];
-        stats[0] = damage;
-        stats[1] = dispersion;
-        stats[2] = recoil;
-        stats[3] = reload;
-        stats[4] = fireRate;
-        stats[5] = maxAmmo;
-
-        gameManager.SetNewStats(stats);
 
         // when shoot you shoot x bullets
         bulletXShoot = bulletXShoot0;

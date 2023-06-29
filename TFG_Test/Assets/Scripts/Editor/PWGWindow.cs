@@ -6,8 +6,8 @@ using UnityEngine;
 public class PWGWindow : EditorWindow
 {
 
-    private GunModifier02 CurrentGun;
-    private GunModifier02 currentlySelectedGun;
+    private GunModifier CurrentGun;
+    private GunModifier currentlySelectedGun;
     private Transform newlySelectedGun;
 
     private void Awake()
@@ -33,9 +33,9 @@ public class PWGWindow : EditorWindow
         if (newlySelectedGun != null)
         {
             // If its a conversation scriptable, load new asset
-            if (newlySelectedGun.GetComponent<GunModifier02>() != null)
+            if (newlySelectedGun.GetComponent<GunModifier>() != null)
             {
-                currentlySelectedGun = newlySelectedGun.GetComponent<GunModifier02>();
+                currentlySelectedGun = newlySelectedGun.GetComponent<GunModifier>();
 
                 if (currentlySelectedGun != CurrentGun)
                 {
@@ -45,7 +45,7 @@ public class PWGWindow : EditorWindow
         }
     }
 
-    public void LoadNewAsset(GunModifier02 asset)
+    public void LoadNewAsset(GunModifier asset)
     {
 
         CurrentGun = asset;

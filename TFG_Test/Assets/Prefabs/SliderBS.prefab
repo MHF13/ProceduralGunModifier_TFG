@@ -547,7 +547,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1230694607}
         m_TargetAssemblyTypeName: PanelSlider, Assembly-CSharp
-        m_MethodName: ChangeValue
+        m_MethodName: SendNewValue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -1,21 +1,48 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[ExecuteInEditMode]
+public enum GunType
+{
+    Pistol,
+    ShootGun
+}
+
+
+[System.Serializable]
+public class BlendShape
+{
+    [HideInInspector]
+    public string name;
+    [Range(0, 100)]
+    public int weightBS;
+    private int weight0;
+
+    public BlendShape(string _name)
+    {
+        name = _name;
+        weightBS = 0;
+        weight0 = 0;
+    }
+
+    public void setW0(int set) { weight0 = set; }
+    public int getW0() { return weight0; }
+
+}
+
 public class GunModifier : MonoBehaviour
 {
-    //FORM
-    //------------------------
     private int numBS;
-    private string[] nameBS;
 
-    [Header("Blend Shape weights")]
-    [Range(0, 100)]
-    public int[] weightBS;
-    private int[] weight0;
+    // Esto sera para seleccionar otro modelo
+    // Aun no haremos nada con eso
+    public GunType actType;
+    private GunType newType;
+
+    [Header("blendShapes")]
+    [SerializeField]
+    public BlendShape[] blendShape;
 
     private SkinnedMeshRenderer meshRenderer;
-
     //Materials
     //------------------------
     private int numMat;
@@ -25,31 +52,40 @@ public class GunModifier : MonoBehaviour
     private Color[] color0;
 
     private Material[] materials;
-
     //------------------------
     [Header("Randomizators")]
     public bool RandomGunForm =false;
-    public bool RandomGunColor =false;
-    public bool RandomGun =false;
+    public bool RandomGunColor = false;
+    public bool RandomGun = false;
 
-    public int count = 0;
-    private void Awake()
+    //------------------------
+    private Gun gun;
+    
+    //-----------------------------------
+    private void Start()
     {
-        // Form
+        
         meshRenderer = GetComponent<SkinnedMeshRenderer>();
 
         Mesh GunMesh = meshRenderer.sharedMesh;
         numBS = GunMesh.blendShapeCount;
 
-        nameBS = new string[numBS];
-        weightBS = new int[numBS];
-        weight0 = new int[numBS];
+        blendShape = new BlendShape[numBS];
 
+        //
+        int[] ret = new int[numBS];
         for (int i = 0; i < numBS; i++)
         {
-            nameBS[i] = GunMesh.GetBlendShapeName(i);
-            weightBS[i] = 0;
-            weight0[i] = 0;
+            string newName = GunMesh.GetBlendShapeName(i);
+            blendShape[i] = new BlendShape(newName);
+            ret[i] = blendShape[i].weightBS;
+        }
+
+        newType = actType;
+        if (this.GetComponent<Gun>())
+        {
+            gun = this.GetComponent<Gun>();
+            this.GetComponent<Gun>().SetNewBS(ret,actType);
         }
 
         // Colors
@@ -62,21 +98,15 @@ public class GunModifier : MonoBehaviour
         {
             color[i] = materials[i].color;
         }
-        count = numMat;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (ChangeForm())
+        // Form
+        if (ChangeForm() || newType != actType)
         {
             UpdateForm();
-        }
-
-        if (ChangeColors())
-        {
-            UpdateColors();
         }
 
         if (RandomGunForm)
@@ -84,6 +114,12 @@ public class GunModifier : MonoBehaviour
             RandomGunForm = false;
             CreateNewForm();
             UpdateForm();
+        }
+
+        // Colors
+        if (ChangeColors())
+        {
+            UpdateColors();
         }
 
         if (RandomGunColor)
@@ -99,38 +135,84 @@ public class GunModifier : MonoBehaviour
             CreateNewColors();
             UpdateGun();
         }
+    }
 
+    //-------------------------------------------------
+    public void RandomForm()
+    {
+        CreateNewForm();
+        UpdateForm();
+    }
+    public void RandomCollor()
+    {
+        CreateNewColors();
+    }
+    public void RandomAll()
+    {
+        CreateNewForm();
+        CreateNewColors();
+        UpdateGun();
     }
 
     // Form
+    // Checks whether the values of sliders have been altered
+    public void SetNewForm(int[] newBS)
+    {
+        for (int i = 0; i < newBS.Length; i++)
+        {
+            blendShape[i].weightBS = newBS[i]; 
+        }
+        UpdateForm();
+    } 
+
     private bool ChangeForm()
     {
-        for (int i = 0; i < numBS; i++)
+        foreach (var item in blendShape)
         {
-            if (weightBS[i] != weight0[i])
+            if (item.weightBS != item.getW0())
             {
                 return true;
             }
         }
         return false;
     }
+
+    // Updates the value of the model's blendshapes with the ones we have saved
     private void UpdateForm()
     {
+        int[] ret = new int[numBS];
         for (int i = 0; i < numBS; i++)
         {
-            meshRenderer.SetBlendShapeWeight(i, weightBS[i]);
-            weight0[i] = weightBS[i];
+            meshRenderer.SetBlendShapeWeight(i, blendShape[i].weightBS);
+            blendShape[i].setW0(blendShape[i].weightBS);
+            ret[i] = blendShape[i].weightBS;
         }
+
+        if(gun) this.GetComponent<Gun>().SetNewBS(ret,actType);
     }
+    
+    // Assigns a random new valor for our blend shapes
     private void CreateNewForm()
     {
-        for (int i = 0; i < numBS; i++)
+        foreach (var item in blendShape)
         {
-            weightBS[i] = Random.Range(0, 100);
+           item.weightBS = Random.Range(0, 100);
         }
     }
 
+    //------------
     // Colors
+    // Checks whether the colour has been altered since the inspector
+
+    public void SetColors(Color[] newColors) 
+    {
+        for (int i = 0; i < newColors.Length; i++)
+        {
+            color[i] = newColors[i];
+            materials[i].color = color[i];
+            color0[i] = color[i];
+        }
+    }
     private bool ChangeColors()
     {
         for (int i = 0; i < numMat; i++)
@@ -142,6 +224,7 @@ public class GunModifier : MonoBehaviour
         }
         return false;
     }
+    // Update the colour of the model with the colours we have in our colour array
     private void UpdateColors()
     {
         for (int i = 0; i < numMat; i++)
@@ -150,6 +233,7 @@ public class GunModifier : MonoBehaviour
             color0[i] = color[i];
         }
     }
+    // Assign a new random colour to each material
     private void CreateNewColors()
     {
         for (int i = 0; i < numMat; i++)
@@ -157,7 +241,7 @@ public class GunModifier : MonoBehaviour
             color[i] = Random.ColorHSV();
         }
     }
-
+    //-----------
     //All
     private void UpdateGun()
     {

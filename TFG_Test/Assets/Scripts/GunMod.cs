@@ -5,7 +5,7 @@ using UnityEngine;
 public class GunMod : MonoBehaviour
 {
 
-    public class BlendShape
+    /*public class BlendShape
     {
         [HideInInspector]
         public string name;
@@ -23,31 +23,16 @@ public class GunMod : MonoBehaviour
         public void setW0(int set) { weight0 = set; }
         public int getW0() { return weight0; }
 
-    }
+    }*/
 
     public BlendShape[] blendShape;
     private int numBS;
 
-    private SkinnedMeshRenderer meshRenderer;
-    public void SetNewForm(int[] newBS)
-    {
-        for (int i = 0; i < newBS.Length; i++)
-        {
-            blendShape[i].weightBS = newBS[i];
-        }
-        UpdateForm();
-    }
+    private Color[] color;
 
-    private void UpdateForm()
-    {
-        int[] ret = new int[numBS];
-        for (int i = 0; i < numBS; i++)
-        {
-            meshRenderer.SetBlendShapeWeight(i, blendShape[i].weightBS);
-            blendShape[i].setW0(blendShape[i].weightBS);
-            ret[i] = blendShape[i].weightBS;
-        }
-    }
+    private Material[] materials;
+
+    private SkinnedMeshRenderer meshRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -67,11 +52,41 @@ public class GunMod : MonoBehaviour
             ret[i] = blendShape[i].weightBS;
         }
 
+        materials = GetComponent<Renderer>().materials;
+        color = new Color[materials.Length];
+
+        for (int i = 0; i < materials.Length; i++)
+        {
+            color[i] = materials[i].color;
+        }
+    }
+    public void SetNewForm(int[] newBS)
+    {
+        for (int i = 0; i < newBS.Length; i++)
+        {
+            blendShape[i].weightBS = newBS[i];
+        }
+
+        UpdateForm();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void UpdateForm()
     {
-        
+        int[] ret = new int[numBS];
+        for (int i = 0; i < numBS; i++)
+        {
+            meshRenderer.SetBlendShapeWeight(i, blendShape[i].weightBS);
+            blendShape[i].setW0(blendShape[i].weightBS);
+            ret[i] = blendShape[i].weightBS;
+        }
+    }
+
+    public void SetColors(Color[] newColors)
+    {
+        for (int i = 0; i < newColors.Length; i++)
+        {
+            color[i] = newColors[i];
+            materials[i].color = color[i];
+        }
     }
 }
